@@ -1,0 +1,33 @@
+SRP -> Single Responsibilty Principle
+OCP -> Open Close Priciple -> open for extention close for modification
+L
+I
+DIP -> Depedency Inversing Principiple -> focusnya di abstrak bukan di detailny
+
+kenapa ada setter getter karena klo misalkan banyak class minta si kelas yang di public bakal terjadi dependency klo ada nama yg sama bakal kacau makanny ad setter getter
+
+refactor alt shift t
+
+alt shift l
+
+3 memori 
+Static -> bisa d akses dari classnya Main.i , bakal ada dari awal sampai akhir
+Stack -> primitive d stack,yg d dlm kurung kurawal bakal kehapus pas udh kelar
+Heap -> malloc new delete free , cthny pas bst klo kita free(root) pas popall memori sisanya masih ada di memori makannya harusny d rekursif       
+
+Garbage Collector = ga usah ngatur memori , Mark & Sweep
+
+REGEX RFC -> validasi regex web jangan sotoy
+
+jadi pas buat validator 
+
+bool check terus ntr d turunin ke banyack class cth emailvalid phonevalid dll karna dia harus SOLID td
+
+Design Pattern = Solusi untuk menyelesaikan masalah masalah umum yg sering terjadi
+Builder Pattern
+
+Observer Pattern
+
+ada satu gambar yang liat banyak orang
+papan score pas biar smua view updateny sama pas liatny
+ada user baru regis harus di email ke admin ke user ada yg listen ada yg observe
