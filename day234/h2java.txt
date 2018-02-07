@@ -1,0 +1,27 @@
+build tools -> configurasi ,testing,dll 
+-> ada 2 maven-> default bawaan STS sama gradle-> google
+
+
+JPA => java persistence ORM (Object Relational Mapping) ex: hibernate
+Template engine spring -> thymeleaf , freemarker,mustache,Groovy ex: in laravel like blade
+
+JWT -> buat generate token biasanya buat anak" JS
+
+mainnya di src/main/java
+
+beans xml spring
+
+2xx -> success
+3xx -> redirect
+4xx -> error sisi client
+5xx -> error sis server
+
+http request
+get -> select
+delete 
+post -> insert
+put -> update
+
+Fetch itu ada 2 biasanya di paging
+-> Lazy -> tarik data nya langsung 1000 data jd tinggal manipulasi pk js g perlu tarik lagi
+-> Eager -> konsep biasa 1000 data di bagi jadi 100 buat tmpil di client terus d paging
