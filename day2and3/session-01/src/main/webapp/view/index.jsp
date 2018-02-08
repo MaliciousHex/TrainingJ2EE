@@ -25,16 +25,7 @@
 
 <div id="main-content">
 
-  <% for(User user : (List<User>)request.getAttribute("users")) {%>
-				<div class="data-user">
-					<span class="user-id" id="<%= user.getId() %>"><%= user.getId() %></span>
-					<span><%= user.getName() %></span>
-					<span><%= user.getEmail() %></span>
-					<span> <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aenean convallis eu tortor ut varius. Integer elit eros, sodales quis sem non, sollicitudin gravida lorem. Praesent porttitor congue nunc, a egestas justo sodales et. Suspendisse non mauris ut metus facilisis congue vitae sit amet mi. Vivamus gravida massa sit amet orci imperdiet, a accumsan orci placerat. Quisque auctor tortor ut lorem volutpat, ac lobortis nisi interdum. Aliquam porta, nulla suscipit iaculis iaculis, mi leo scelerisque nunc, ac egestas lectus quam ut elit. Nunc at felis ut leo dignissim sagittis nec consequat ante. Curabitur ut libero non purus semper eleifend. Ut vel risus non libero tempus tempus. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Duis ac mauris sed justo pretium ultricies. Aliquam erat volutpat. Nulla ut quam id justo bibendum sodales. Ut cursus augue libero, id ultrices urna molestie et. Praesent bibendum erat nec neque facilisis, at dapibus tellus luctus. </p>
-  			 		</span>
-			
-				</div>
-	<%} %>
+ 
 			
 </div>   
   </body>
@@ -44,57 +35,47 @@
 			  integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8="
 			  crossorigin="anonymous"></script>
   <script>
-  	  var last_id = $(".user-id:last").attr("id");
-  	  
-      $(window).scroll(function() {
+	var limit = 5;
+	var offset = 0;
+	$(window).scroll(function(){
+		if($(window).height() + $(window).scrollTop()
+			< $(document).height()) return;
+		fetch();
+	});
 
-        if($(window).scrollTop() + $(window).height() >= $(document).height()) {
+	$(document).ready(function(){
+		fetch();
+	});
+
+	function fetch(){
+		$.ajax({
+			url: "http://localhost:8080/users/fetch/" + limit + "/" + offset ,
+			type: "get",
+			beforeSend: function(){
+				$('.ajax-load').show();
+			}
+		})
+		.done(function(data){
+			console.log(data);
+			$('.ajax-load').hide();
 			
-        	$.ajax({
-				url: 'http://localhost:8080/users/fetch/3/' + last_id,
-				type: "get",
-				beforeSend: function(){
-					$('.ajax-load').show();
-				}
-			})
-			.done(function(data){
-				console.log("last_id" + last_id);
-				$('.ajax-load').hide();
-				console.log(data.length);
-				retrieveData(data);
-				//$("#data-user").append(data);
-			})
-			.fail(function(){
-				console.log("server not respond call admin");
-			});
+			for(var i = 0; i < data.length; i++){
+				$('#main-content').append("<h3>Data ke"+ data[i].id + "</h3> <div> <span>"+data[i].name+"</span><span>"+data[i].email+"</span><span>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Cum architecto pariatur voluptas debitis quae vitae illo necessitatibus est dolor quod aliquid commodi dicta, quia rerum quos, atque quasi, ab omnis.Lorem ipsum dolor sit amet, consectetur adipisicing elit. Cum architecto pariatur voluptas debitis quae vitae illo necessitatibus est dolor quod aliquid commodi dicta, quia rerum quos, atque quasi, ab omnis.</span></div>");
+			}
 			
-
-        }
-
-   	 	});
-      
-      function retrieveData(data){
-    	  var htmlString = "";
-    		//console.log(data.movies.length);
-
-    		for(var i = 0 ; i < data.length ; i++){
-    			console.log("data id" + i + " = " + data[i].id);
-    			console.log("name" + data[i].name);
-    		}
-    			//htmlString += 	"<div class='data-user'>" +
-				//				
-				//					
-				//					
-				// <span></span>
-				///<span></span>
-				///<span> <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aenean convallis eu tortor ut varius. Integer elit eros, sodales quis sem non, sollicitudin gravida lorem. Praesent porttitor congue nunc, a egestas justo sodales et. Suspendisse non mauris ut metus facilisis congue vitae sit amet mi. Vivamus gravida massa sit amet orci imperdiet, a accumsan orci placerat. Quisque auctor tortor ut lorem volutpat, ac lobortis nisi interdum. Aliquam porta, nulla suscipit iaculis iaculis, mi leo scelerisque nunc, ac egestas lectus quam ut elit. Nunc at felis ut leo dignissim sagittis nec consequat ante. Curabitur ut libero non purus semper eleifend. Ut vel risus non libero tempus tempus. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Duis ac mauris sed justo pretium ultricies. Aliquam erat volutpat. Nulla ut quam id justo bibendum sodales. Ut cursus augue libero, id ultrices urna molestie et. Praesent bibendum erat nec neque facilisis, at dapibus tellus luctus. </p>
-			 	//	</span>
+			offset += data.length;
+		})
+		.fail(function(){
+			console.log("server not respond call admin");
+		});
 		
-			//</div>;
-    			//console.log(data.movies[i]);
-    		
-    		//contentjs.insertAdjacentHTML('beforeend',htmlString);
-      }
+		
+		
+		
+	}
+	
+	
+ 
   </script>
   
 </html>
