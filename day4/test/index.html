@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title></title>
+	<script src="http://code.jquery.com/jquery-3.3.1.min.js"></script>
+	<style>
+		div{
+			height:200px;
+		}
+	</style>
+</head>
+<body>
+<div id="wrapper">
+	
+</div>
+<script>
+	var limit = 5;
+	var offset = 0;
+	$(window).scroll(function(){
+		if($(window).height() + $(window).scrollTop()
+			< $(document).height()) return;
+		fetch();
+	});
+
+	$(document).ready(function(){
+		fetch();
+	});
+
+	function fetch(){
+		$.get("http://localhost:8080/fetch/city/" + limit + "/" + offset, function(data){
+			
+			for(var i = 0; i < data.length; i++){
+				$("#wrapper").append(`
+					<div>
+						<span>${data[i].name}</span>
+					</div>
+				`);
+			}
+			
+			offset += data.length;
+		});
+	}
+</script>
+</body>
+</html>

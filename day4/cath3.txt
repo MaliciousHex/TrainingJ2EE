@@ -1,0 +1,14 @@
+view->controller->service sm repository
+service->repository->model
+
+client id -> tiap web/request pati megang id sama secret permession u/ akses apiny
+client secret ->
+
+decode ,encode => ga perlu pake key
+encrypt , decrypt => perlu key , simetric key cmn satu key yg jaman now pake 2 key public sm private key
+hash=> satu arah doang ga bsa d balikin
+
+access token di bagi 3
+1. algoritma encryptny pake apa
+2. informasi user -> username 
+3. tokenny buat cocokin
